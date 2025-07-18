@@ -1,6 +1,4 @@
-// You typically don't need to import cypress-iframe here if it's in support/e2e.js
-// If you're explicitly importing, ensure the path is correct
-// import 'cypress-iframe';
+
 
 class LearningInstance {
     // Selectors
@@ -9,22 +7,16 @@ class LearningInstance {
     btnCreateLearningInstance = "button[aria-label='Create Learning Instance']";
      btnCreateFinal = "button[aria-label='Create']";
     
-    // NEW: Selector for the description field, assuming it's an optional text area.
-    // Make sure this matches your actual element if you plan to use it.
+   
     txtLearningInstanceDescription = "textarea[data-cy='li-description-input']"; 
     
     txtLearningInstanceName = "input[name='name']";
  selDocumentType = "button[data-path='RioSelectInputQuery.toggle-button']"; 
  btnnext="button[name='submit']";
-    // Selector for the iframe itself
+
     iframeSelector = "iframe.modulepage-frame"; // Based on your provided XPath
 
-    /**
-     * Navigates to the Learning Instances page.
-     * This method handles clicking the 'AI' button and then the 'Document Automation' link.
-     * It uses {force: true} to overcome persistent 'element covered' issues for lnkDocAuto.
-     * Includes iframe handling for the 'Create Learning Instance' button.
-     */
+   
     navigateToLearningInstances() {
         cy.log("Attempting to navigate to Learning Instances via AI...");
 
@@ -60,12 +52,7 @@ class LearningInstance {
         });
     }
 
-    /**
-     * Enters the learning instance name and optionally description.
-     * Assumes these input fields are within the same iframe where 'Create Learning Instance' button was clicked.
-     * @param {string} name - The name for the learning instance.
-     * @param {string} [description] - Optional description for the learning instance.
-     */
+    
  
     enterLearningInstanceDetails(name) {
         cy.log(`Entering Learning Instance Name: "${name}" (inside iframe)...`);
@@ -78,8 +65,7 @@ class LearningInstance {
                 .type(name);          // Type the provided 'name' (e.g., "test") into the field
             cy.log(`Entered name: "${name}"`);
 
-            // If you uncomment txtLearningInstanceDescription later, it would also need to be inside this iframe context:
-            // cy.wrap($iframeBody).find(this.txtLearningInstanceDescription, { timeout: 10000 }).should('be.visible').type(description);
+        
         });
         cy.log("Learning instance details entered.");
     }
