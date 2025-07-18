@@ -1,49 +1,45 @@
 class BotEditorPage {
-    // Locator for the Actions panel search input
+   
     txtActionsSearch = "input[placeholder='Search actions']";
 
-    // Locator for the 'Message Box' action in the actions list after searching
+  
     actionMessageBox = "span[title='Message box']";
 
-    // Locator for the message box input field in the properties panel that appears
+   
     txtMessageBoxContent = "div[placeholder='Required'][name='content']";
 
-    // Locator for the 'Save' button in the bot editor
+   
     btnSaveBot = "button[name='save']"; 
 
-    // Locator for the close modal button after saving
     btnCloseModal = "button[name='close']";
 
-    // NEW LOCATOR: Button to leave the page (after close)
-    btnLeavepage = "button[name='accept']"; // Verify this selector, could also be 'button:contains("Leave")' or similar
+  
+    btnLeavepage = "button[name='accept']";
 
     GoHomepage="a[title='Home']";
 
-    /**
-     * Adds the 'Message Box' action to the bot and configures its content.
-     * @param {string} message The text content for the message box.
-     */
+   
     addMessageBoxAction(message) {
         cy.log("Attempting to add Message Box action...");
 
-        // 1. Type 'Message Box' into the actions search box
+     
         cy.get(this.txtActionsSearch, { timeout: 10000 })
           .should('be.visible')
-          .clear() // Clear any existing text
+          .clear() 
           .type('Message Box');
         cy.log("Typed 'Message Box' into actions search.");
 
-        // 2. Select (click) the 'Message Box' action from the search results
-        cy.wait(1000); // Small wait to allow search results to render
+        
+        cy.wait(1000); 
         cy.get(this.actionMessageBox, { timeout: 10000 })
-          .should('be.visible') // Ensure it's visible after search
+          .should('be.visible') 
           .click();
         cy.log("Selected 'Message Box' action.");
 
-        // 3. Type the desired message into the message box content input field
+       
         cy.get(this.txtMessageBoxContent, { timeout: 10000 })
-          .should('be.visible') // Ensure the input field appears in the properties panel
-          .clear() // Clear any default text
+          .should('be.visible') 
+          .clear()
           .type(message);
         cy.log(`Typed message: "${message}" into Message Box content.`);
     }
